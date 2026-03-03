@@ -1495,6 +1495,9 @@ function createNightSky() {
 
   // Fade message in after 2 seconds
   setTimeout(() => { msgBox.style.opacity = '1'; }, 2000);
+
+  // Close btn
+  const closeBtn = document.createElement('button');
   closeBtn.innerHTML = '✕ Close';
   closeBtn.style.cssText = `
     position:absolute;top:16px;right:20px;z-index:10;

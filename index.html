@@ -1155,7 +1155,7 @@ body {
       </div>
 
       <!-- Chaos button -->
-      <button class="chaos-btn" id="chaosBtn" onclick="triggerChaos()">
+      <button class="chaos-btn" id="chaosBtn">
         🎨 Press to officially celebrate
       </button>
       <p class="chaos-message" id="chaosMessage"></p>
@@ -1827,6 +1827,9 @@ function initTypeTape() {
 }
 
 initTypeTape();
+
+// Bind chaos button safely after DOM ready
+document.getElementById('chaosBtn').addEventListener('click', triggerChaos);
 
 
 /* ═══════════════════════════════════════════════════

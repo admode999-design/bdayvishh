@@ -1133,15 +1133,6 @@ body {
   <!-- ══════════════════════════════════════════ -->
   <!-- THE ONE EMOTIONAL SECTION                  -->
   <!-- ══════════════════════════════════════════ -->
-  <section class="message-section" id="message">
-    <div class="message-wrapper reveal">
-      <p class="message-label">A Message For You</p>
-      <blockquote class="message-text">
-        I hope this year brings you the kind of friendships that feel like rest, not effort. The kind of conversations that meet your depth without exhausting you. May you always find spaces where you do not have to perform, only exist. And I hope, in between all the thinking and holding, you feel deeply seen.
-      </blockquote>
-    </div>
-  </section>
-
   <!-- ══════════════════════════════════════════ -->
   <!-- FINAL VERDICT                              -->
   <!-- ══════════════════════════════════════════ -->
@@ -1475,8 +1466,35 @@ function createNightSky() {
   `;
   document.head.appendChild(style);
 
-  // Close btn
-  const closeBtn = document.createElement('button');
+  // Personal message that fades in after fireworks start
+  const msgBox = document.createElement('div');
+  msgBox.id = 'skyMessage';
+  msgBox.style.cssText = `
+    position:absolute;
+    bottom:145px;
+    left:50%;
+    transform:translateX(-50%);
+    max-width:620px;
+    width:90%;
+    text-align:center;
+    z-index:6;
+    opacity:0;
+    transition:opacity 1.5s ease;
+    padding:1.5rem 2rem;
+    background:rgba(0,0,0,0.45);
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:8px;
+    backdrop-filter:blur(4px);
+  `;
+  msgBox.innerHTML = `
+    <p style="font-family:'Crimson Pro',Georgia,serif;font-style:italic;font-size:clamp(0.95rem,2.2vw,1.2rem);color:rgba(255,255,255,0.92);line-height:1.9;">
+      I hope this year brings you the kind of friendships that feel like rest, not effort. The kind of conversations that meet your depth without exhausting you. May you always find spaces where you do not have to perform, only exist. And I hope, in between all the thinking and holding, you feel deeply seen.
+    </p>
+  `;
+  sky.appendChild(msgBox);
+
+  // Fade message in after 2 seconds
+  setTimeout(() => { msgBox.style.opacity = '1'; }, 2000);
   closeBtn.innerHTML = '✕ Close';
   closeBtn.style.cssText = `
     position:absolute;top:16px;right:20px;z-index:10;

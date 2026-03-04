@@ -828,8 +828,31 @@ body {
 </head>
 <body>
 
-  <!-- LOADING SCREEN -->
-  <div class="loader" id="loader">
+  <!-- PASSWORD SCREEN -->
+  <div id="passwordScreen" style="
+    position:fixed;inset:0;z-index:999999;
+    background:#0D0D0D;
+    display:flex;align-items:center;justify-content:center;
+    flex-direction:column;gap:1.5rem;
+    font-family:'DM Mono','Courier New',monospace;
+  ">
+    <p style="color:#D63031;font-size:0.7rem;letter-spacing:0.4em;text-transform:uppercase;">CLASSIFIED // ACCESS RESTRICTED</p>
+    <p style="color:rgba(245,240,232,0.5);font-size:0.85rem;letter-spacing:0.1em;">Enter password to view case file</p>
+    <input id="pwInput" type="password" placeholder="••••••••" style="
+      background:transparent;border:1px solid rgba(255,255,255,0.2);
+      color:#F5F0E8;font-family:'DM Mono',monospace;font-size:1rem;
+      padding:0.75rem 1.25rem;outline:none;text-align:center;
+      letter-spacing:0.3em;width:240px;border-radius:2px;
+    " onkeydown="if(event.key==='Enter') checkPassword()" />
+    <button onclick="checkPassword()" style="
+      background:transparent;border:1px solid #D63031;
+      color:#D63031;font-family:'DM Mono',monospace;
+      font-size:0.75rem;letter-spacing:0.2em;padding:0.6rem 2rem;
+      cursor:pointer;text-transform:uppercase;
+    ">Unlock</button>
+    <p id="pwError" style="color:#FF7675;font-size:0.72rem;letter-spacing:0.1em;opacity:0;transition:opacity 0.3s;">Wrong password. Try again.</p>
+  </div>
+
     <div class="loader-inner">
       <p class="loader-tag">CLASSIFIED</p>
       <p class="loader-text">Compiling evidence...<span class="blink">_</span></p>
@@ -1175,6 +1198,22 @@ body {
 /* ═══════════════════════════════════════════════════
    BIRTHDAY CASE FILE v2 — script2.js
    ═══════════════════════════════════════════════════ */
+
+// ── PASSWORD CHECK ────────────────────────────────
+function checkPassword() {
+  const input = document.getElementById('pwInput').value.trim().toLowerCase();
+  if (input === 'iforgot') {
+    const screen = document.getElementById('passwordScreen');
+    screen.style.transition = 'opacity 0.6s ease';
+    screen.style.opacity = '0';
+    setTimeout(() => screen.style.display = 'none', 650);
+  } else {
+    const err = document.getElementById('pwError');
+    err.style.opacity = '1';
+    document.getElementById('pwInput').value = '';
+    setTimeout(() => err.style.opacity = '0', 2000);
+  }
+}
 
 /* ── LOADING SCREEN ─────────────────────────────────
    Fake progress bar. Dramatic. Unnecessary. Perfect.
